@@ -1,0 +1,33 @@
+name: CI Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Print "Hello, CI!" to logs
+        run: echo "Hello, CI!"
+
+      - name: Set up C++ environment
+        run: sudo apt update && sudo apt install -y g++
+
+      - name: Compile C++ code
+        run: g++ -o hello hello.cpp
+
+      - name: Archive executable
+        if: success()
+        uses: actions/upload-artifact@v2
+        with:
+          name: hello-executable
+          path: ./hello
