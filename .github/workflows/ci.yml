@@ -26,8 +26,6 @@ jobs:
         run: g++ -o hello hello.cpp
 
       - name: Archive executable
-        if: success()
-        uses: actions/upload-artifact@v2
         with:
           name: hello-executable
-          path: ./hello
+          path: ./hello  # if the executable is in the root of the repository
