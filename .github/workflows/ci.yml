@@ -20,12 +20,14 @@ jobs:
         run: echo "Hello, CI!"
 
       - name: Set up C++ environment
-        run: sudo apt update && sudo apt install -y g++
+        run: sudo apt update && sudo apt install -y g++ 
 
       - name: Compile C++ code
         run: g++ -o hello hello.cpp
 
       - name: Archive executable
+        uses: actions/upload-artifact@v4  # Add the correct action version here
         with:
           name: hello-executable
-          path: ./hello  # if the executable is in the root of the repository
+          path: ./hello  # path to the compiled executable
+
